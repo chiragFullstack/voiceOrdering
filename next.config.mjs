@@ -41,8 +41,19 @@ const nextConfig = {
           { key: 'Cross-Origin-Opener-Policy', value: 'same-origin' },
         ],
       },
+      // Everything that touches a live order is per-caller and must never be
+      // cached. `/api/menu` is deliberately excluded: it is identical for every
+      // caller and sets its own CDN cache policy.
       {
-        source: '/api/:path*',
+        source: '/api/session',
+        headers: [{ key: 'Cache-Control', value: 'no-store, max-age=0' }],
+      },
+      {
+        source: '/api/session/:path*',
+        headers: [{ key: 'Cache-Control', value: 'no-store, max-age=0' }],
+      },
+      {
+        source: '/api/health',
         headers: [{ key: 'Cache-Control', value: 'no-store, max-age=0' }],
       },
     ];

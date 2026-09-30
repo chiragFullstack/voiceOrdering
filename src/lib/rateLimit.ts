@@ -68,7 +68,12 @@ export function checkRateLimit(clientKey: string): RateLimitVerdict {
  * is never used for authorisation, and nothing in this app is authorised by IP.
  */
 export function clientKeyFromRequest(request: Request): string {
-  const forwarded = request.headers.get('x-forwarded-for');
-  const first = forwarded?.split(',')[0]?.trim();
-  return first || request.headers.get('x-real-ip') || 'unknown';
+  try {
+    const forwarded = request.headers.get('x-forwarded-for');
+    const first = forwarded?.split(',')[0]?.trim();
+    return first || request.headers.get('x-real-ip') || 'unknown';
+  } catch {
+    // No readable headers means no per-client identity; throttle as one bucket.
+    return 'unknown';
+  }
 }

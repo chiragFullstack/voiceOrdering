@@ -8,6 +8,7 @@ import { z } from 'zod';
 import { endCall, getCall } from '@/agent/callService';
 import { handleRoute, parseRouteParam } from '@/lib/api';
 
+export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
 
 /** Session ids are UUIDs. Anything else is rejected before it reaches the store. */

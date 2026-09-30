@@ -39,6 +39,25 @@ type RouteHandler<T> = (context: RouteContext) => Promise<T> | T;
 interface RouteOptions {
   /** Skip throttling for cheap, cacheable reads such as the menu. */
   readonly rateLimit?: boolean;
+  /** Overrides the default `no-store` for responses that may be cached. */
+  readonly cacheControl?: string;
+}
+
+/**
+ * Reads a value that may throw, falling back instead of propagating.
+ *
+ * Request accessors are not always safe to touch: outside a normal request —
+ * during a build-time render, for instance — the object handed to a route can
+ * be a stand-in whose getters throw. Reading them defensively matters most in
+ * the error path, where a throw would replace the real failure with a
+ * misleading one and lose the diagnosis entirely.
+ */
+function safeRead<T>(read: () => T, fallback: T): T {
+  try {
+    return read();
+  } catch {
+    return fallback;
+  }
 }
 
 export async function handleRoute<T>(
@@ -48,7 +67,8 @@ export async function handleRoute<T>(
 ): Promise<NextResponse> {
   const requestId = newRequestId();
   const startedAt = Date.now();
-  const route = new URL(request.url).pathname;
+  const route = safeRead(() => new URL(request.url).pathname, 'unknown');
+  const method = safeRead(() => request.method, 'UNKNOWN');
 
   try {
     if (options.rateLimit !== false) {
@@ -61,16 +81,19 @@ export async function handleRoute<T>(
     logger.info('request ok', {
       requestId,
       route,
-      method: request.method,
+      method,
       durationMs: Date.now() - startedAt,
     });
 
     return NextResponse.json(payload, {
       status: 200,
-      headers: { 'x-request-id': requestId },
+      headers: {
+        'x-request-id': requestId,
+        ...(options.cacheControl ? { 'cache-control': options.cacheControl } : {}),
+      },
     });
   } catch (error) {
-    return errorResponse(error, requestId, route, request.method, startedAt);
+    return errorResponse(error, requestId, route, method, startedAt);
   }
 }
 

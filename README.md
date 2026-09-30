@@ -284,9 +284,30 @@ Every variable is optional; the app runs with an empty environment. See `.env.ex
 
 - **Browser support.** Web Speech recognition is Chrome/Edge (and partially Safari). Elsewhere the
   app detects this, says so, and offers the text box — which runs the same agent end to end.
-- **Single process.** Sessions and rate-limit counters live in memory. Behind a load balancer this
-  needs sticky sessions, or `sessionStore.ts` swapped for Redis behind the same interface.
+- **One process holds the sessions.** See below — this decides where to host it.
 - **English only.** The lexicon and cue words are English; the recogniser language is `en-US`.
+
+### Hosting: use a long-running server, not serverless
+
+Call sessions live in memory (`src/agent/sessionStore.ts`), so **every turn of a call must reach the
+same process**. That is true on any single Node server and is why the app needs no database.
+
+It is *not* true on serverless platforms. On Vercel, Netlify Functions, Lambda and friends, each
+request may land on a fresh instance, so a call can break mid-order with *"That call session no
+longer exists"* — intermittently, and more often the longer the order.
+
+| Host | Works? |
+| --- | --- |
+| Render, Railway, Fly.io, a VPS, Docker, `npm start` | Yes — one process, nothing to configure |
+| Vercel / Netlify / Lambda | Not reliably — sessions are per-instance |
+
+Two ways to run it on serverless if you must:
+
+1. Swap the store. `sessionStore.ts` is four functions (`createSession`, `requireSession`,
+   `saveSession`, `deleteSession`) behind which Redis or Vercel KV drops in without touching the
+   agent.
+2. Make the session stateless — carry the order in a signed token instead of server memory. Prices
+   stay server-derived either way, so this does not weaken the "server owns the total" rule.
 
 ## API
 

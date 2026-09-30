@@ -12,6 +12,7 @@ import { takeTurn } from '@/agent/callService';
 import { config } from '@/lib/config';
 import { handleRoute, parseRouteParam, readJsonBody } from '@/lib/api';
 
+export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
 
 const sessionIdSchema = z.string().uuid();

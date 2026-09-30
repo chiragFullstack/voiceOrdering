@@ -9,6 +9,7 @@ import { getMenuIndex } from '@/domain/menu';
 import { storeStats } from '@/agent/sessionStore';
 import { handleRoute } from '@/lib/api';
 
+export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
 
 export async function GET(request: Request) {
