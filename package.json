@@ -1,0 +1,35 @@
+{
+  "name": "smash-and-go-voice-order",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Voice ordering agent for the Smash & Go cloud kitchen.",
+  "engines": {
+    "node": ">=20.9.0"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint src tests",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "verify": "npm run typecheck && npm run lint && npm run test && npm run build",
+    "pack": "node scripts/pack.mjs"
+  },
+  "dependencies": {
+    "next": "^16.3.7",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "zod": "3.24.1"
+  },
+  "devDependencies": {
+    "@types/node": "22.10.7",
+    "@types/react": "19.0.7",
+    "@types/react-dom": "19.0.3",
+    "eslint": "9.18.0",
+    "eslint-config-next": "^16.3.7",
+    "typescript": "5.7.3",
+    "vitest": "2.1.8"
+  }
+}

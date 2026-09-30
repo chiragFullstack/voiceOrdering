@@ -1,0 +1,323 @@
+{
+  "schemaVersion": 1,
+  "restaurant": {
+    "name": "Smash & Go",
+    "tagline": "Cloud Kitchen",
+    "greeting": "Thanks for calling Smash and Go! What can I get started for you?"
+  },
+  "currency": {
+    "code": "AED",
+    "spokenName": "dirhams",
+    "minorUnitsPerUnit": 100
+  },
+  "pricing": {
+    "vatRatePercent": 0,
+    "roundingMode": "half-up"
+  },
+  "categories": [
+    { "id": "burgers", "name": "Burgers", "note": "Served with a side of house sauce.", "sortOrder": 1 },
+    { "id": "sides", "name": "Sides", "note": "", "sortOrder": 2 },
+    { "id": "drinks", "name": "Drinks", "note": "", "sortOrder": 3 },
+    { "id": "combos", "name": "Combo Meals", "note": "Combo = burger + side + medium soft drink. Save AED 4 vs. a la carte.", "sortOrder": 4 }
+  ],
+  "optionGroups": [
+    {
+      "id": "burger-addons",
+      "name": "Add-ons",
+      "kind": "modifier",
+      "minSelect": 0,
+      "maxSelect": 6,
+      "choices": [
+        { "id": "extra-cheese", "name": "Extra Cheese", "priceDelta": 400, "aliases": ["extra cheese", "more cheese", "add cheese", "double cheese", "with cheese", "cheese"] },
+        { "id": "extra-patty", "name": "Extra Patty", "priceDelta": 1000, "aliases": ["extra patty", "another patty", "double patty", "extra meat", "extra chicken", "add a patty"] },
+        { "id": "fried-egg", "name": "Fried Egg", "priceDelta": 600, "aliases": ["fried egg", "with an egg", "add egg", "egg on top", "egg"] },
+        { "id": "avocado", "name": "Avocado", "priceDelta": 500, "aliases": ["avocado", "avo", "add avocado"] },
+        { "id": "no-onions", "name": "No Onions", "priceDelta": 0, "aliases": ["no onions", "no onion", "without onions", "without onion", "hold the onions", "hold onions", "skip the onions", "onion free"] },
+        { "id": "no-pickles", "name": "No Pickles", "priceDelta": 0, "aliases": ["no pickles", "no pickle", "without pickles", "without pickle", "hold the pickles", "hold pickles", "skip the pickles"] }
+      ]
+    },
+    {
+      "id": "fries-size",
+      "name": "Size",
+      "kind": "variant",
+      "minSelect": 1,
+      "maxSelect": 1,
+      "defaultChoiceId": "fries-regular",
+      "choices": [
+        { "id": "fries-regular", "name": "Regular", "priceDelta": 0, "aliases": ["regular", "normal", "standard", "small", "reg"] },
+        { "id": "fries-large", "name": "Large", "priceDelta": 500, "aliases": ["large", "big", "upsize", "upsized"] }
+      ]
+    },
+    {
+      "id": "soft-drink-size",
+      "name": "Size",
+      "kind": "variant",
+      "minSelect": 1,
+      "maxSelect": 1,
+      "defaultChoiceId": "soft-drink-medium",
+      "askWhenUnspecified": true,
+      "choices": [
+        { "id": "soft-drink-small", "name": "Small", "priceDelta": 0, "aliases": ["small", "little"] },
+        { "id": "soft-drink-medium", "name": "Medium", "priceDelta": 200, "aliases": ["medium", "regular", "mid"] },
+        { "id": "soft-drink-large", "name": "Large", "priceDelta": 400, "aliases": ["large", "big", "upsize", "upsized"] }
+      ]
+    },
+    {
+      "id": "soft-drink-flavour",
+      "name": "Flavour",
+      "kind": "variant",
+      "minSelect": 1,
+      "maxSelect": 1,
+      "defaultChoiceId": "coke",
+      "choices": [
+        { "id": "coke", "name": "Coke", "priceDelta": 0, "aliases": ["coke", "cola", "coca cola", "coca-cola", "pepsi"] },
+        { "id": "sprite", "name": "Sprite", "priceDelta": 0, "aliases": ["sprite", "lemonade", "7up", "seven up"] },
+        { "id": "fanta", "name": "Fanta", "priceDelta": 0, "aliases": ["fanta", "orange soda", "orange"] }
+      ]
+    },
+    {
+      "id": "iced-tea-flavour",
+      "name": "Flavour",
+      "kind": "variant",
+      "minSelect": 1,
+      "maxSelect": 1,
+      "defaultChoiceId": "iced-tea-peach",
+      "choices": [
+        { "id": "iced-tea-peach", "name": "Peach", "priceDelta": 0, "aliases": ["peach"] },
+        { "id": "iced-tea-lemon", "name": "Lemon", "priceDelta": 0, "aliases": ["lemon"] }
+      ]
+    },
+    {
+      "id": "milkshake-flavour",
+      "name": "Flavour",
+      "kind": "variant",
+      "minSelect": 1,
+      "maxSelect": 1,
+      "defaultChoiceId": "shake-chocolate",
+      "choices": [
+        { "id": "shake-chocolate", "name": "Chocolate", "priceDelta": 0, "aliases": ["chocolate", "choco", "chocolatey"] },
+        { "id": "shake-vanilla", "name": "Vanilla", "priceDelta": 0, "aliases": ["vanilla"] },
+        { "id": "shake-strawberry", "name": "Strawberry", "priceDelta": 0, "aliases": ["strawberry", "berry"] }
+      ]
+    },
+    {
+      "id": "combo-drink-flavour",
+      "name": "Drink",
+      "kind": "variant",
+      "minSelect": 1,
+      "maxSelect": 1,
+      "defaultChoiceId": "combo-coke",
+      "choices": [
+        { "id": "combo-coke", "name": "Coke", "priceDelta": 0, "aliases": ["coke", "cola", "coca cola", "pepsi"] },
+        { "id": "combo-sprite", "name": "Sprite", "priceDelta": 0, "aliases": ["sprite", "lemonade", "7up"] },
+        { "id": "combo-fanta", "name": "Fanta", "priceDelta": 0, "aliases": ["fanta", "orange soda", "orange"] }
+      ]
+    }
+  ],
+  "items": [
+    {
+      "id": "grilled-chicken-burger",
+      "categoryId": "burgers",
+      "name": "Grilled Chicken Burger",
+      "description": "grilled chicken breast, lettuce, tomato, onion",
+      "basePrice": 2800,
+      "available": true,
+      "optionGroupIds": ["burger-addons"],
+      "aliases": ["grilled chicken burger", "grilled chicken", "grilled burger", "chicken burger", "grilled"]
+    },
+    {
+      "id": "crispy-chicken-burger",
+      "categoryId": "burgers",
+      "name": "Crispy Chicken Burger",
+      "description": "crispy fried chicken fillet, lettuce, mayo",
+      "basePrice": 2600,
+      "available": true,
+      "optionGroupIds": ["burger-addons"],
+      "aliases": ["crispy chicken burger", "crispy chicken", "crispy burger", "fried chicken burger", "chicken burger", "crispy"]
+    },
+    {
+      "id": "veggie-burger",
+      "categoryId": "burgers",
+      "name": "Veggie Burger",
+      "description": "spiced potato and pea patty, lettuce",
+      "basePrice": 2400,
+      "available": true,
+      "optionGroupIds": ["burger-addons"],
+      "aliases": ["veggie burger", "veggie", "vegetarian burger", "vegetarian", "veg burger", "potato burger"]
+    },
+    {
+      "id": "double-chicken-smash",
+      "categoryId": "burgers",
+      "name": "Double Chicken Smash",
+      "description": "two smashed chicken patties, cheese, onions",
+      "basePrice": 3800,
+      "available": true,
+      "optionGroupIds": ["burger-addons"],
+      "aliases": ["double chicken smash", "double smash", "double chicken", "smash burger", "double burger", "smash"]
+    },
+    {
+      "id": "spicy-zinger-burger",
+      "categoryId": "burgers",
+      "name": "Spicy Zinger Burger",
+      "description": "hot-marinated chicken, jalapenos, spicy mayo",
+      "basePrice": 3000,
+      "available": true,
+      "optionGroupIds": ["burger-addons"],
+      "aliases": ["spicy zinger burger", "spicy zinger", "zinger burger", "zinger", "spicy burger", "spicy chicken burger", "hot burger"]
+    },
+    {
+      "id": "fries",
+      "categoryId": "sides",
+      "name": "Fries",
+      "description": "Regular 10 / Large 15",
+      "basePrice": 1000,
+      "available": true,
+      "optionGroupIds": ["fries-size"],
+      "aliases": ["fries", "french fries", "chips", "fry", "side of fries"]
+    },
+    {
+      "id": "loaded-cheese-fries",
+      "categoryId": "sides",
+      "name": "Loaded Cheese Fries",
+      "description": "cheddar sauce, jalapenos, spring onion",
+      "basePrice": 1800,
+      "available": true,
+      "optionGroupIds": [],
+      "aliases": ["loaded cheese fries", "loaded fries", "cheese fries", "cheesy fries", "loaded"]
+    },
+    {
+      "id": "onion-rings",
+      "categoryId": "sides",
+      "name": "Onion Rings",
+      "description": "6 pieces, crispy golden batter",
+      "basePrice": 1400,
+      "available": true,
+      "optionGroupIds": [],
+      "aliases": ["onion rings", "onion ring", "rings"]
+    },
+    {
+      "id": "mozzarella-sticks",
+      "categoryId": "sides",
+      "name": "Mozzarella Sticks",
+      "description": "6 pieces, marinara dip",
+      "basePrice": 1600,
+      "available": true,
+      "optionGroupIds": [],
+      "aliases": ["mozzarella sticks", "mozzarella stick", "mozzarella", "cheese sticks", "cheese stick", "mozarella sticks"]
+    },
+    {
+      "id": "coleslaw",
+      "categoryId": "sides",
+      "name": "Coleslaw",
+      "description": "creamy, fresh",
+      "basePrice": 800,
+      "available": true,
+      "optionGroupIds": [],
+      "aliases": ["coleslaw", "cole slaw", "slaw"]
+    },
+    {
+      "id": "soft-drink",
+      "categoryId": "drinks",
+      "name": "Soft Drink",
+      "description": "Coke / Sprite / Fanta - Small 6 / Medium 8 / Large 10",
+      "basePrice": 600,
+      "available": true,
+      "optionGroupIds": ["soft-drink-size", "soft-drink-flavour"],
+      "speechNameGroupId": "soft-drink-flavour",
+      "aliases": ["soft drink", "soda", "fizzy drink", "cold drink"],
+      "shortcuts": [
+        { "phrases": ["coke", "cola", "coca cola", "coca-cola", "pepsi"], "selections": [{ "groupId": "soft-drink-flavour", "choiceId": "coke" }] },
+        { "phrases": ["sprite", "7up", "seven up"], "selections": [{ "groupId": "soft-drink-flavour", "choiceId": "sprite" }] },
+        { "phrases": ["fanta", "orange soda"], "selections": [{ "groupId": "soft-drink-flavour", "choiceId": "fanta" }] }
+      ]
+    },
+    {
+      "id": "fresh-lemon-mint",
+      "categoryId": "drinks",
+      "name": "Fresh Lemon Mint",
+      "description": "",
+      "basePrice": 1400,
+      "available": true,
+      "optionGroupIds": [],
+      "aliases": ["fresh lemon mint", "lemon mint", "lemon and mint", "mint lemonade"]
+    },
+    {
+      "id": "iced-tea",
+      "categoryId": "drinks",
+      "name": "Iced Tea",
+      "description": "peach or lemon",
+      "basePrice": 1200,
+      "available": true,
+      "optionGroupIds": ["iced-tea-flavour"],
+      "aliases": ["iced tea", "ice tea", "cold tea"],
+      "shortcuts": [
+        { "phrases": ["peach iced tea", "peach ice tea", "peach tea"], "selections": [{ "groupId": "iced-tea-flavour", "choiceId": "iced-tea-peach" }] },
+        { "phrases": ["lemon iced tea", "lemon ice tea", "lemon tea"], "selections": [{ "groupId": "iced-tea-flavour", "choiceId": "iced-tea-lemon" }] }
+      ]
+    },
+    {
+      "id": "milkshake",
+      "categoryId": "drinks",
+      "name": "Milkshake",
+      "description": "chocolate / vanilla / strawberry",
+      "basePrice": 1800,
+      "available": true,
+      "optionGroupIds": ["milkshake-flavour"],
+      "aliases": ["milkshake", "milk shake", "shake", "thick shake"],
+      "shortcuts": [
+        { "phrases": ["chocolate shake", "chocolate milkshake", "choco shake"], "selections": [{ "groupId": "milkshake-flavour", "choiceId": "shake-chocolate" }] },
+        { "phrases": ["vanilla shake", "vanilla milkshake"], "selections": [{ "groupId": "milkshake-flavour", "choiceId": "shake-vanilla" }] },
+        { "phrases": ["strawberry shake", "strawberry milkshake"], "selections": [{ "groupId": "milkshake-flavour", "choiceId": "shake-strawberry" }] }
+      ]
+    },
+    {
+      "id": "bottled-water",
+      "categoryId": "drinks",
+      "name": "Bottled Water",
+      "description": "500ml",
+      "basePrice": 400,
+      "available": true,
+      "optionGroupIds": [],
+      "aliases": ["bottled water", "water", "bottle of water", "still water", "mineral water"]
+    },
+    {
+      "id": "classic-combo",
+      "categoryId": "combos",
+      "name": "Classic Combo",
+      "description": "Grilled Chicken Burger + Regular Fries + Medium Soft Drink",
+      "basePrice": 4200,
+      "available": true,
+      "optionGroupIds": ["burger-addons", "combo-drink-flavour"],
+      "aliases": ["classic combo", "classic meal", "classic", "combo one", "first combo"],
+      "components": [
+        { "itemId": "grilled-chicken-burger", "quantity": 1, "fixedSelections": [] },
+        { "itemId": "fries", "quantity": 1, "fixedSelections": [{ "groupId": "fries-size", "choiceId": "fries-regular" }] },
+        { "itemId": "soft-drink", "quantity": 1, "fixedSelections": [{ "groupId": "soft-drink-size", "choiceId": "soft-drink-medium" }] }
+      ]
+    },
+    {
+      "id": "zinger-combo",
+      "categoryId": "combos",
+      "name": "Zinger Combo",
+      "description": "Spicy Zinger Burger + Onion Rings + Medium Soft Drink",
+      "basePrice": 4800,
+      "available": true,
+      "optionGroupIds": ["burger-addons", "combo-drink-flavour"],
+      "aliases": ["zinger combo", "zinger meal", "spicy combo", "combo two", "second combo"],
+      "components": [
+        { "itemId": "spicy-zinger-burger", "quantity": 1, "fixedSelections": [] },
+        { "itemId": "onion-rings", "quantity": 1, "fixedSelections": [] },
+        { "itemId": "soft-drink", "quantity": 1, "fixedSelections": [{ "groupId": "soft-drink-size", "choiceId": "soft-drink-medium" }] }
+      ]
+    }
+  ],
+  "offMenu": [
+    { "match": ["pizza", "pizzas", "calzone", "garlic bread"], "reply": "we don't do pizza", "suggestItemIds": ["double-chicken-smash", "classic-combo"] },
+    { "match": ["beef", "beef burger", "steak", "bacon", "pork", "ham", "lamb"], "reply": "we're an all-chicken and veggie kitchen, so there's no beef or pork on the menu", "suggestItemIds": ["double-chicken-smash", "spicy-zinger-burger"] },
+    { "match": ["sushi", "pasta", "noodles", "biryani", "shawarma", "taco", "tacos", "burrito", "curry"], "reply": "that's not something we make here", "suggestItemIds": ["spicy-zinger-burger", "loaded-cheese-fries"] },
+    { "match": ["nuggets", "chicken nuggets", "wings", "chicken wings", "popcorn chicken", "tenders", "chicken strips"], "reply": "we don't have nuggets or wings", "suggestItemIds": ["mozzarella-sticks", "onion-rings"] },
+    { "match": ["salad", "wrap", "sandwich", "hot dog", "hotdog", "soup"], "reply": "that's not on our menu", "suggestItemIds": ["veggie-burger", "coleslaw"] },
+    { "match": ["ice cream", "icecream", "dessert", "brownie", "cake", "cookie", "sundae", "donut"], "reply": "we don't do desserts", "suggestItemIds": ["milkshake"] },
+    { "match": ["coffee", "latte", "cappuccino", "espresso", "beer", "wine", "juice", "smoothie"], "reply": "we don't serve that", "suggestItemIds": ["iced-tea", "fresh-lemon-mint", "milkshake"] }
+  ]
+}
